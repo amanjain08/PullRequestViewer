@@ -1,28 +1,40 @@
 package com.juggad.pullrequests.data.model;
 
 import android.arch.lifecycle.LiveData;
+import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by Aman Jain on 22/06/18.
  */
 public class PullRequestModel extends LiveData {
 
-    String url;
-    String title;
-    String body;
-    String createdAt;
-    String updatedAt;
-    User user;
+    @SerializedName("html_url")
+    public String url;
+
+    public String title;
+
+    public String body;
+
+    @SerializedName("created_at")
+    public String createdAt;
+
+    @SerializedName("updated_at")
+    public String updatedAt;
+
+    public User user;
+
+    public int number;
 
     public PullRequestModel(final String url, final String title, final String body, final String createdAt,
             final String updatedAt,
-            final User user) {
+            final User user, final int number) {
         this.url = url;
         this.title = title;
         this.body = body;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.user = user;
+        this.number = number;
     }
 
     public String getUrl() {
@@ -71,5 +83,13 @@ public class PullRequestModel extends LiveData {
 
     public void setUser(final User user) {
         this.user = user;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(final int number) {
+        this.number = number;
     }
 }
