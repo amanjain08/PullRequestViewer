@@ -22,6 +22,9 @@ public class PullRequestListViewModel extends ViewModel {
 
     private MutableLiveData<Resource<List<PullRequestModel>>> pullRequestListObservable = new MutableLiveData<>();
 
+    /*
+    This method fetch open Pull requests using RetroFit API
+     */
     public void fetchPullRequests(String ownerName, String repositoryName) {
         Resource<List<PullRequestModel>> resource = new Resource(Status.LOADING, null, null);
         pullRequestListObservable.setValue(resource);
