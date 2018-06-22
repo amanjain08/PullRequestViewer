@@ -1,17 +1,10 @@
 package com.juggad.pullrequests.data.repository;
 
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
 import com.juggad.pullrequests.BuildConfig;
-import com.juggad.pullrequests.data.model.PullRequestModel;
 import java.io.IOException;
-import java.util.List;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -20,7 +13,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class PullRequestRepository {
 
-    private PullRequestService mPullRequestService;
+    public PullRequestService mPullRequestService;
+    public Retrofit retrofit;
 
     private static PullRequestRepository mPullRequestRepository;
 
@@ -30,7 +24,7 @@ public class PullRequestRepository {
         httpClient.interceptors().add(getInterceptor());
         OkHttpClient client = httpClient.build();
 
-        Retrofit retrofit = new Retrofit.Builder().client(client)
+        retrofit = new Retrofit.Builder().client(client)
                 .baseUrl(PullRequestService.API_GITHUB_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
@@ -60,25 +54,5 @@ public class PullRequestRepository {
             mPullRequestRepository = new PullRequestRepository();
         }
         return mPullRequestRepository;
-    }
-
-    public LiveData<List<PullRequestModel>> getOpenPullRequests(String ownerName, String repoName) {
-        final MutableLiveData<List<PullRequestModel>> data = new MutableLiveData<>();
-
-        mPullRequestService.getOpenPullRequests(ownerName, repoName).enqueue(
-                new Callback<List<PullRequestModel>>() {
-                    @Override
-                    public void onResponse(final Call<List<PullRequestModel>> call,
-                            final Response<List<PullRequestModel>> response) {
-                        data.setValue(response.body());
-                    }
-
-                    @Override
-                    public void onFailure(final Call<List<PullRequestModel>> call, final Throwable t) {
-
-                    }
-                });
-
-        return data;
     }
 }
