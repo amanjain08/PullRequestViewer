@@ -2,6 +2,8 @@ package com.juggad.pullrequests.data.model;
 
 import android.arch.lifecycle.LiveData;
 import com.google.gson.annotations.SerializedName;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 /**
  * Created by Aman Jain on 22/06/18.
@@ -62,7 +64,16 @@ public class PullRequestModel extends LiveData {
     }
 
     public String getCreatedAt() {
-        return createdAt;
+        SimpleDateFormat fromUser = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        SimpleDateFormat myFormat = new SimpleDateFormat("MMM d, h:mm a");
+
+        try {
+
+           return myFormat.format(fromUser.parse(createdAt));
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return "";
+        }
     }
 
     public void setCreatedAt(final String createdAt) {
@@ -70,7 +81,16 @@ public class PullRequestModel extends LiveData {
     }
 
     public String getUpdatedAt() {
-        return updatedAt;
+        SimpleDateFormat fromUser = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        SimpleDateFormat myFormat = new SimpleDateFormat("MMM d, h:mm a");
+
+        try {
+
+            return myFormat.format(fromUser.parse(updatedAt));
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return "";
+        }
     }
 
     public void setUpdatedAt(final String updatedAt) {
