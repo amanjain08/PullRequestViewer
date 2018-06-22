@@ -15,10 +15,6 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        def keyPropertiesFile = rootProject.file("key.properties")
-        def keyProperties = new Properties();
-        keyProperties.load(new FileInputStream(keyPropertiesFile));
-        buildConfigField "String", "GITHUB_TOKEN", keyProperties['GITHUB_OATH_KEY']
     }
     buildTypes {
         release {
