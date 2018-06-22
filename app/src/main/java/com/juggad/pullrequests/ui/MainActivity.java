@@ -71,8 +71,13 @@ public class MainActivity extends AppCompatActivity {
                                 mProgressDialog.cancel();
                             }
                             mPullRequestModels.clear();
-                            mPullRequestModels.addAll(listResource.getData());
+                            if (listResource.getData() == null) {
+                                showToast(listResource.getMsg());
+                            } else {
+                                mPullRequestModels.addAll(listResource.getData());
+                            }
                             pullRequestAdapter.notifyDataSetChanged();
+
                         } else if (Status.ERROR == status) {
                             if (mProgressDialog != null) {
                                 mProgressDialog.cancel();

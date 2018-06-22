@@ -35,7 +35,7 @@ public class PullRequestListViewModel extends ViewModel {
                             public void onResponse(final Call<List<PullRequestModel>> call,
                                     final Response<List<PullRequestModel>> response) {
                                 if (response.isSuccessful()) {
-                                    if (response.body() != null) {
+                                    if (response.body() != null && !response.body().isEmpty()) {
                                         Resource resource = new Resource(Status.SUCCESS, response.body(), null);
                                         pullRequestListObservable.setValue(resource);
                                     } else {
