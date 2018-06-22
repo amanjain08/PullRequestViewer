@@ -40,9 +40,9 @@ public class PullRequestAdapter extends RecyclerView.Adapter<PullRequestViewHold
         final PullRequestModel data = mPullRequestModels.get(position);
         holder.title.setText(String.format("#%s, %s", data.getNumber(), data.getTitle()));
         holder.body.setText(data.getBody());
-        holder.createdAt.setText(data.getCreatedAt());
-        holder.updatedAt.setText(data.getUpdatedAt());
-        holder.name.setText(data.getUser().getLogin());
+        holder.createdAt.setText(String.format("Created At: %s", data.getCreatedAt()));
+        holder.updatedAt.setText(String.format("Updated At: %s", data.getUpdatedAt()));
+        holder.name.setText(String.format("Created By: %s", data.getUser().getLogin()));
         holder.itemView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(final View v) {
@@ -72,6 +72,7 @@ public class PullRequestAdapter extends RecyclerView.Adapter<PullRequestViewHold
 
         }
     }
+
 
     interface OnItemClickListener {
 
